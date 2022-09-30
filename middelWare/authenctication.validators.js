@@ -36,8 +36,10 @@ const isAuthenticated = async (req, res, next) => {
 };
 
 const isAdmin = async (req, res, next) => {
+  const user = req.user;
   const adminRole = await roleSerives.getRoleByName("admin");
-  const roleAdmin = user.hasRole(adminRole);
+  const roleAdmin = await user.hasRole(adminRole);
+  console.log(roleAdmin);
   if (!roleAdmin) {
     return res.json({
       status: 401,

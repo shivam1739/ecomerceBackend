@@ -39,17 +39,16 @@ const getRoleByName = async (roleName) => {
     console.log(err);
   }
 };
-const getRoleById = async (id) => {
+/*const getRoleById = async (id) => {
   try {
-    const response = await Role.findByPk(id);
+    const response = await Role.findByPk();
     return response;
   } catch (err) {
     console.log(err);
   }
-};
+};*/
 module.exports = {
   addRollToUser,
   removeRoleFromUser,
   getRoleByName,
-  getRoleById,
 };

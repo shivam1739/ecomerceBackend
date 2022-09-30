@@ -1,10 +1,15 @@
 const authServices = require("../services/auth.services");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const roleSerives = require("../services/role.services");
 const signup = async (req, res) => {
   /* route for signup */
   try {
     const response = await authServices.signup(req.body);
+    console.log(response);
+    if (response) {
+      await roleSerives.addRollToUser(response.id, 3);
+    }
     return res.json({
       message: "succsessfull signup",
       code: 200,
@@ -33,7 +38,7 @@ const signin = async (req, res) => {
     });
   }
 
-  const passwordVerified = await authServices.verifyPassword(
+  const passwordVerified = authServices.verifyPassword(
     req.body.password,
     userData.password
   );
