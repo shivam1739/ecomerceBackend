@@ -1,7 +1,7 @@
 const { Role, User } = require("../models/index");
 const authServices = require("../services/auth.services");
 
-const addRollToUser = async (userId, roleId) => {
+const addRoleToUser = async (userId, roleId) => {
   const user = await User.findOne({
     where: {
       id: userId,
@@ -48,7 +48,7 @@ const getRoleByName = async (roleName) => {
   }
 };*/
 module.exports = {
-  addRollToUser,
+  addRoleToUser,
   removeRoleFromUser,
   getRoleByName,
 };

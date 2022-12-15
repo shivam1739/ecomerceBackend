@@ -1,20 +1,28 @@
-const roleServices = require("../services/role.services");
+const roleService = require("../services/role.services");
 
-const addRollToUser = async (req, res) => {
-  const response = await roleServices.addRollToUser(
-    req.body.userId,
-    req.body.roleId
+const addRoleToUser = (req, res) => {
+  let response = roleService.addRoleToUser(
+    req.body.userEmail,
+    req.body.roleName
   );
-  return res.json({
-    message: "successfully add role ",
-    code: 200,
-    success: true,
-    data: response,
-  });
+  if (response) {
+    return res.json({
+      message: "Role is added successfully",
+      success: true,
+      code: 200,
+      data: response,
+    });
+  } else {
+    return res.json({
+      message: "Internal server error",
+      success: true,
+      code: 500,
+    });
+  }
 };
 
 const removeRoleFromUser = async (req, res) => {
-  const response = await roleServices.removeRoleFromUser(
+  const response = await roleService.removeRoleFromUser(
     req.body.userEmail,
     req.body.roleName
   );
@@ -35,4 +43,4 @@ const removeRoleFromUser = async (req, res) => {
   }
 };
 
-module.exports = { addRollToUser, removeRoleFromUser };
+module.exports = { addRoleToUser, removeRoleFromUser };

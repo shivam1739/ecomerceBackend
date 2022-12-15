@@ -6,7 +6,7 @@ const routes = (app) => {
     "/ecomm/api/v1/role",
     AuthenticationMiddleWare.isAuthenticated,
     AuthenticationMiddleWare.isAdmin,
-    roleController.addRollToUser
+    roleController.addRoleToUser
   );
   app.delete(
     "/ecomm/api/v1/role",

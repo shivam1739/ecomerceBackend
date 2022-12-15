@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "123456789",
-    "database": "ecomm",
-    "host": "127.0.0.1",
+    "username": "ubnroxphkr5etjsw",
+    "password": "1ZYcHP1IMwStlPu6AZzr",
+    "database": "b5iygdkkkkz9wodim2od",
+    "host": "b5iygdkkkkz9wodim2od-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   },
   "test": {
