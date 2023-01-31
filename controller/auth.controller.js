@@ -1,24 +1,25 @@
 const authServices = require("../services/auth.services");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const roleSerives = require("../services/role.services");
+const jwt = require("jsonwebtoken");
+const helperService = require("../services/helper.service");
+require("dotenv").config();
+
 const signup = async (req, res) => {
   /* route for signup */
   try {
     const response = await authServices.signup(req.body);
     console.log(response);
-    if (response) {
-      await roleSerives.addRollToUser(response.id, 3);
-    }
+
     return res.json({
-      message: "succsessfull signup",
+      message: "succsessfully signup",
       code: 200,
       success: true,
       data: response,
     });
   } catch (response) {
+    console.log(response);
     return res.json({
-      message: response,
+      message: response.errors[0].message,
       code: 400,
       success: true,
       data: response,
@@ -27,7 +28,8 @@ const signup = async (req, res) => {
 };
 
 const signin = async (req, res) => {
-  const userData = await authServices.getuserbyEmail(req.body.email);
+  console.log(req);
+  const userData = await helperService.getuserbyEmail(req.body.email);
 
   if (!userData) {
     return res.json({
@@ -68,5 +70,15 @@ const signin = async (req, res) => {
     token: token,
   });
 };
+const authenticated = (req, res) => {
+  if (req.user) {
+    return res.json({
+      message: "isAuthenticated",
+      code: 200,
+      success: true,
+      data: "true",
+    });
+  }
+};
 
-module.exports = { signup, signin };
+module.exports = { signup, signin, authenticated };

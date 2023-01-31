@@ -1,6 +1,7 @@
 const { User } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const roleService = require("./role.services");
 
 const signup = async (body) => {
   const signupResponse = await User.create({
@@ -8,18 +9,9 @@ const signup = async (body) => {
     password: body.password,
     username: body.username,
   });
-
+  const customerRole = await roleService.getRoleByName("customer");
+  await signupResponse.addRole(customerRole);
   return signupResponse;
-};
-
-const getuserbyEmail = async (emailData) => {
-  const response = await User.findOne({
-    where: {
-      email: emailData,
-    },
-  });
-
-  return response;
 };
 
 const verifyPassword = (pass, hashPass) => {
@@ -38,7 +30,6 @@ const verifyToken = (token) => {
 
 module.exports = {
   signup,
-  getuserbyEmail,
   verifyPassword,
   verifyToken,
 };

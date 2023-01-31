@@ -1,19 +1,16 @@
 const { Role, User } = require("../models/index");
 const authServices = require("../services/auth.services");
+const helperService = require("../services/helper.service");
 
-const addRoleToUser = async (userId, roleId) => {
-  const user = await User.findOne({
-    where: {
-      id: userId,
-    },
-  });
-  const role = await Role.findOne({
-    where: {
-      id: roleId,
-    },
-  });
-  user.addRole(role);
-  return user;
+const addRoleToUser = async (userEmail, roleName) => {
+  try {
+    const user = await helperService.getuserbyEmail(userEmail);
+    const role = await getRoleByName(roleName);
+    await user.addRole(role);
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const removeRoleFromUser = async (userEmail, roleName) => {

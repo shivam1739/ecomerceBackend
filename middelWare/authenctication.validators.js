@@ -1,5 +1,6 @@
 const authServices = require("../services/auth.services");
 const roleSerives = require("../services/role.services");
+const helperService = require("../services/helper.service");
 
 const isAuthenticated = async (req, res, next) => {
   const token = req.headers["x-access-token"];
@@ -22,7 +23,7 @@ const isAuthenticated = async (req, res, next) => {
     });
   }
 
-  const user = await authServices.getuserbyEmail(response.email);
+  const user = await helperService.getuserbyEmail(response.email);
   if (!user) {
     return res.json({
       status: 401,
