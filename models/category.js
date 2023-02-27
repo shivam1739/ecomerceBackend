@@ -1,8 +1,7 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
+  const queryInterface = sequelize.getQueryInterface();
   class Category extends Model {
     /**
      * Helper method for defining associations.
@@ -12,16 +11,24 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasMany(models.Product, {
-        foreignKey: 'category_id'
-      })
+        foreignKey: "category_id",
+      });
     }
   }
-  Category.init({
-    name: DataTypes.STRING,
-    describtion: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Category',
-  });
+  Category.init(
+    {
+      name: DataTypes.STRING,
+      img: DataTypes.STRING,
+      describtion: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "Category",
+    }
+  );
+  // queryInterface.addColumn("Categories", "img", {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  // });
   return Category;
 };

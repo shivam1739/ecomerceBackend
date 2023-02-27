@@ -1,6 +1,8 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
+  const queryInterface = sequelize.getQueryInterface();
+
   class Product extends Model {
     /**
      * Helper method for defining associations.
@@ -26,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       describtion: DataTypes.STRING,
       cost: DataTypes.INTEGER,
+      img: DataTypes.STRING,
       category_id: DataTypes.INTEGER,
     },
     {
@@ -33,5 +36,9 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Product",
     }
   );
+  // queryInterface.addColumn("Products", "img", {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  // });
   return Product;
 };
