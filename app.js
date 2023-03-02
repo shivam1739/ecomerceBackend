@@ -7,8 +7,11 @@ const roleRoute = require("./routes/role.routes");
 const cartRoute = require("./routes/order.routes");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const port = 3001;
+console.log(process.env.PORT);
+console.log(process.env.MYSQL_ADDON_URI);
 
 const app = express();
 app.use(express.json());
