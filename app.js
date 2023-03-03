@@ -9,7 +9,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
-const port = 3001;
+const port = process.env.PORT || 3000;
 console.log(process.env.PORT);
 console.log(process.env.MYSQL_ADDON_URI);
 
